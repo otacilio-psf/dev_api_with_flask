@@ -2,7 +2,6 @@ from flask_restful import Resource
 from flask import request
 import json
 
-global backlog
 backlog = [
     {
         "backlog_id": 1,

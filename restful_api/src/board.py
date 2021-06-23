@@ -1,7 +1,7 @@
 from flask_restful import Resource
-from flask import request
-import json
+from flask         import request
 from src.backlog   import backlog
+import json
 
 to_do_list = [
     {
