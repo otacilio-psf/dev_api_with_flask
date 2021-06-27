@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import query, scoped_session, sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///staff.db')
+engine = create_engine('sqlite:///sqlalchemy_class/staff.db')
 db_session = scoped_session(sessionmaker(autocommit=False, bind=engine))
 
 Base = declarative_base()

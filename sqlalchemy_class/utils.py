@@ -26,13 +26,5 @@ if __name__ == '__main__':
         Developers(name="Filho", age=29, email="ota3@gmail.com")
     ]
     
-    for d in devs:
-        create_devs(d)
     
-    read_all_devs()
-    update_dev()
-    print('')
-    read_all_devs()
-    delete_dev()
-    print('')
     read_all_devs()
