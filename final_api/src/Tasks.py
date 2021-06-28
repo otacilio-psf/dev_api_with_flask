@@ -1,8 +1,22 @@
-from flask_restful import Resource
-from flask import request
-from src.models import Tasks_model, Developers_model
+from flask_restful     import Resource
+from flask             import request
+from flask_httpauth    import HTTPBasicAuth
+from werkzeug.security import check_password_hash
+from src.models        import Tasks_model, Developers_model, Users
+
+auth = HTTPBasicAuth()
+
+@auth.verify_password
+def verify(user, password):
+    if not (user, password):
+        return False
+    user_pass = Users.query.filter_by(user=user, active=1).first()
+    if not user_pass:
+        return False
+    return check_password_hash(user_pass.password, password)
 
 class Tasks(Resource):
+    @auth.login_required
     def post(self):
         b_data = request.json
         try:
@@ -24,7 +38,7 @@ class Tasks(Resource):
                 "menssage": f"Error: {e}"
             }
         return response
-    
+
     def get(self):
         tasks = Tasks_model.query.all()
         response = []
@@ -68,7 +82,8 @@ class Task(Resource):
                 "menssage": f"Error: {e}"
             }
         return response
-    
+
+    @auth.login_required
     def put(self, id):
         task = Tasks_model.query.filter_by(id=id).first()
         b_data = request.json
@@ -89,6 +104,7 @@ class Task(Resource):
             }
         return response
     
+    @auth.login_required
     def delete(self, id):
         task = Tasks_model.query.filter_by(id=id).first()
         try:

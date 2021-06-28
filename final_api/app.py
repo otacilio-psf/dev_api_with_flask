@@ -1,7 +1,7 @@
-from flask          import Flask
-from flask_restful  import Api
-from src.Developers import Developer, Developers
-from src.Tasks      import Task, Tasks
+from flask             import Flask
+from flask_restful     import Api
+from src.Developers    import Developer, Developers
+from src.Tasks         import Task, Tasks
 
 app = Flask(__name__)
 api = Api(app)
